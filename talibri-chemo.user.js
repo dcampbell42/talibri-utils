@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Talibri Chemo
 // @namespace    http://tampermonkey.net/
-// @version      1.1.0
+// @version      1.1.1
 // @description  Remove some of the Cancer
 // @author       Dan Campbell
 // @match        https://www.talibri.com/*
@@ -13,7 +13,8 @@
 var highlightColor     = '#0c0'; // hex color code or recognized color code
 var textColor          = '#ccc'; // hex color code or recognized color code
 var chatColor          = '#ccc'; // hex color code or recognized color code
-var btnColor           = '#5bc0de';
+var btnColor           = '#ccc';
+var infoBtnColor       = '#5bc0de';
 var primaryBtnColor    = '#069';
 var goodBtnColor       = '#0c0';
 var badBtnColor        = '#c00';
@@ -28,7 +29,8 @@ var displayChatHeading = false; // true or false
 var highlightColor     = '#0c0'; // hex color code or recognized color code
 var textColor          = '#ccc'; // hex color code or recognized color code
 var chatColor          = '#ccc'; // hex color code or recognized color code
-var btnColor           = '#5bc0de';
+var btnColor           = '#fff';
+var infoBtnColor       = '#5bc0de';
 var primaryBtnColor    = '#069';
 var goodBtnColor       = '#5cb85c';
 var badBtnColor        = '#d9534f';
@@ -45,13 +47,17 @@ var displayChatHeading = false; // true or false
     addGlobalStyle('html, body { height: 100%; }');
     //change colors
     addGlobalStyle('body { color:'+textColor+' !important; }');
-    addGlobalStyle('.btn { background-color: '+btnColor+'; border-color: black; color:#fff; }');
+    addGlobalStyle('.btn { background-color: '+btnColor+'; border-color: black; color:#333}');
     addGlobalStyle('.btn:hover { background-color: '+btnColor+'; border-color: black; filter: brightness(120%); }');
-    addGlobalStyle('.btn-primary { background-color:'+primaryBtnColor+' !important;}');
-    addGlobalStyle('.btn-primary:hover { background-color:'+goodBtnColor+' !important;}');
-    addGlobalStyle('.btn-danger { background-color: '+badBtnColor+' !important;}');
+    addGlobalStyle('.btn-default { background-color:'+btnColor+' !important; color:#333}');
+    addGlobalStyle('.btn-default:hover { background-color:'+btnColor+' !important;}');
+    addGlobalStyle('.btn-info { background-color:'+infoBtnColor+' !important;  color: white}');
+    addGlobalStyle('.btn-info:hover { background-color:'+infoBtnColor+' !important;}');
+    addGlobalStyle('.btn-primary { background-color:'+primaryBtnColor+' !important; color: white}');
+    addGlobalStyle('.btn-primary:hover { background-color:'+primaryBtnColor+' !important;}');
+    addGlobalStyle('.btn-danger { background-color: '+badBtnColor+' !important; color: white}');
     addGlobalStyle('.btn-danger:hover { background-color: '+badBtnColor+' !important;}');
-    addGlobalStyle('.btn-success { background-color:'+goodBtnColor+' !important;}');
+    addGlobalStyle('.btn-success { background-color:'+goodBtnColor+' !important; color: white}');
     addGlobalStyle('.btn-success:hover { background-color:'+goodBtnColor+' !important;}');
     addGlobalStyle('.fa-star,.fa-star-half-o { color:'+starColor+' !important;}');
 
@@ -88,7 +94,7 @@ var displayChatHeading = false; // true or false
 
     //profile styles
     addGlobalStyle('#profile-main-div .col-xs-8 { max-height:none !important; overflow-y:visible !important; margin-bottom:75px;}');
-    addGlobalStyle('.progress-bar {background-color:'+highlightColor+'}');
+    addGlobalStyle('.progress-bar {background-color:'+highlightColor+'; color: black !important;}');
     addGlobalStyle('.main-page>.well-transparent {margin-bottom: 75px; !important; max-height:100vh !important;}');
     addGlobalStyle('#profile-main-div .col-xs-8 .panel-success .panel-body { max-height:none !important; overflow-y:visible !important;}');
 
@@ -139,10 +145,12 @@ function enterDarkMode(){
     addGlobalStyle('.popover { background-color: #333 !important}');
     addGlobalStyle('.popover-title { background-color: #333 !important}');
     addGlobalStyle('#main-chat-text-area {background-color: #333 !important;color: #ccc !important}');
-    addGlobalStyle('#progressBarContainer {background-color:#f5f5f5 !important;border-radius: 4px;-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);}');
+    addGlobalStyle('#progressBarContainer {background-color:#ccc !important;border-radius: 4px;-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);}');
     addGlobalStyle('#progressBar {background-color:'+highlightColor+' !important;}');
     addGlobalStyle('#user-stat-actions { color: black !important; padding-top:2px !important;}');
     addGlobalStyle('.nav>li>a:hover { background-color: #333;');
+    addGlobalStyle('.progress { background-color: #ccc;');
     //modal
     addGlobalStyle('.modal-content{ background-color:#333; }');
+    addGlobalStyle('.modal-content input, .modal-content select{ background-color:#ccc !important; color: black }');
 }
