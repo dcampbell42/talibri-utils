@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Talibri Chemo
 // @namespace    http://tampermonkey.net/
-// @version      1.1.1
+// @version      1.1.2
 // @description  Remove some of the Cancer
 // @author       Dan Campbell
 // @match        https://www.talibri.com/*
@@ -72,7 +72,8 @@ var displayChatHeading = false; // true or false
     addGlobalStyle('body>.container-fluid:first-of-type>div.row>div.col-xs-3 { padding-left:0 !important; height:calc(100vh - 228px) !important; position: fixed !important; width:20%; }');
     addGlobalStyle('.main-chat-panel.panel-heading { height:37px !important; }');
     addGlobalStyle('#messages { height:calc(100vh - 228px) !important; }');
-    addGlobalStyle('#messages .card-text { color: '+chatColor+' !important;}');
+    addGlobalStyle('#messages .card-text { color: '+chatColor+';}');
+    addGlobalStyle('#messages .admin {background-color: '+highlightColor+'; color: black !important;}');
     addGlobalStyle('.main-page { margin-left:20% !important; width:80% !important; margin-right:0 !important; padding-right:0 !important; }');
     addGlobalStyle('.main-chat-panel .form-group>br,.main-chat-panel .form-group>.text-muted {display:none; }');
     addGlobalStyle('.main-chat-panel .panel-footer { height:80px !important; }');
@@ -147,7 +148,7 @@ function enterDarkMode(){
     addGlobalStyle('#main-chat-text-area {background-color: #333 !important;color: #ccc !important}');
     addGlobalStyle('#progressBarContainer {background-color:#ccc !important;border-radius: 4px;-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);}');
     addGlobalStyle('#progressBar {background-color:'+highlightColor+' !important;}');
-    addGlobalStyle('#user-stat-actions { color: black !important; padding-top:2px !important;}');
+    addGlobalStyle('#user-stat-actions td.row-1.column-1,#user-stat-actions td.row-1.column-2{ color: black !important; padding-top:2px !important;}');
     addGlobalStyle('.nav>li>a:hover { background-color: #333;');
     addGlobalStyle('.progress { background-color: #ccc;');
     //modal
