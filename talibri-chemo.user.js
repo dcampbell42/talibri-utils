@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Talibri Chemo
 // @namespace    http://tampermonkey.net/
-// @version      1.1.3
+// @version      1.2.0
 // @description  Remove some of the Cancer
 // @author       Dan Campbell
 // @match        https://www.talibri.com/*
@@ -13,14 +13,16 @@
 var highlightColor     = '#0c0'; // hex color code or recognized color code
 var textColor          = '#ccc'; // hex color code or recognized color code
 var chatColor          = '#ccc'; // hex color code or recognized color code
-var btnColor           = '#ccc';
+var btnColor           = '#0c0';
+var defaultBtnColor    = '#ccc';
 var infoBtnColor       = '#5bc0de';
-var primaryBtnColor    = '#069';
+var primaryBtnColor    = '#0c0';
 var goodBtnColor       = '#0c0';
 var badBtnColor        = '#c00';
-var starColor          = '#ccc';
+var starColor          = '#0c0';
+var diceColor          = '#0c0';
 
-var darkMode           = true;   // true or false
+var glassMode          = true;   // true or false
 var displayChatHeading = false; // true or false
 // END EDITING
 
@@ -29,12 +31,14 @@ var displayChatHeading = false; // true or false
 var highlightColor     = '#0c0'; // hex color code or recognized color code
 var textColor          = '#ccc'; // hex color code or recognized color code
 var chatColor          = '#ccc'; // hex color code or recognized color code
-var btnColor           = '#fff';
+var btnColor           = '#0c0';
+var defaultBtnColor    = '#ccc';
 var infoBtnColor       = '#5bc0de';
 var primaryBtnColor    = '#069';
 var goodBtnColor       = '#5cb85c';
 var badBtnColor        = '#d9534f';
 var starColor          = '#ccc';
+var diceColor          = '#0c0';
 var darkMode           = true;   // true or false
 var displayChatHeading = false; // true or false
 */
@@ -47,10 +51,12 @@ var displayChatHeading = false; // true or false
     addGlobalStyle('html, body { height: 100%; }');
     //change colors
     addGlobalStyle('body { color:'+textColor+' !important; }');
-    addGlobalStyle('.btn { background-color: '+btnColor+'; border-color: black; color:#333}');
+    addGlobalStyle('.btn,.required-ingredient { background-color: '+btnColor+'; border-color: #333; color:#333}');
     addGlobalStyle('.btn:hover { background-color: '+btnColor+'; border-color: black; filter: brightness(120%); }');
-    addGlobalStyle('.btn-default { background-color:'+btnColor+' !important; color:#333}');
-    addGlobalStyle('.btn-default:hover { background-color:'+btnColor+' !important;}');
+    addGlobalStyle('.btn-default { background-color:'+defaultBtnColor+'; color:#333}');
+    addGlobalStyle('.btn-default:hover { background-color:'+defaultBtnColor+';}');
+    addGlobalStyle('.required-ingredient { background-color: '+btnColor+'; border-color: #333; color:#333}');
+    addGlobalStyle('.required-ingredient:hover { background-color: '+btnColor+'; border-color: black; filter: brightness(120%); }');
     addGlobalStyle('.btn-info { background-color:'+infoBtnColor+' !important;  color: white}');
     addGlobalStyle('.btn-info:hover { background-color:'+infoBtnColor+' !important;}');
     addGlobalStyle('.btn-primary { background-color:'+primaryBtnColor+' !important; color: white}');
@@ -60,6 +66,7 @@ var displayChatHeading = false; // true or false
     addGlobalStyle('.btn-success { background-color:'+goodBtnColor+' !important; color: white}');
     addGlobalStyle('.btn-success:hover { background-color:'+goodBtnColor+' !important;}');
     addGlobalStyle('.fa-star,.fa-star-half-o { color:'+starColor+' !important;}');
+    addGlobalStyle('.bg-success { background-color: '+highlightColor+';}');
 
     //set static height
     addGlobalStyle('.navbar-fixed-top { height:50px !important }');
@@ -92,6 +99,7 @@ var displayChatHeading = false; // true or false
     //inventory styles
     addGlobalStyle('.inventory-panel { max-height:none !important; overflow-y:visible !important; margin-bottom: 75px;}');
     addGlobalStyle('.inventory-panel>.panel-body { max-height:none !important; overflow-y:visible !important;  }');
+    addGlobalStyle('.components-panel>.panel-body { max-height:none !important; overflow-y:visible !important;  }');
 
     //profile styles
     addGlobalStyle('#profile-main-div .col-xs-8 { max-height:none !important; overflow-y:visible !important; margin-bottom:75px;}');
@@ -107,10 +115,14 @@ var displayChatHeading = false; // true or false
 
     //skillbar styles
     addGlobalStyle('#skill_details .panel-footer {height: auto !important;}');
+    addGlobalStyle('#skill_details .panel-body {text-align:center;}');
     addGlobalStyle('#skill_details {width: 450px; max-height:none !important; overflow-y:visible !important;}');
     addGlobalStyle('.dropdown .dropdown-toggle {height:100%;}');
+    addGlobalStyle('#dice-roll {width: 300px; margin-left:auto !important; margin-right:auto !important;display:flex;flex-flow:row;justify-content:space-evenly;}');
+    addGlobalStyle('#dice-roll div {width: 37px;padding:0 !important;margin:0 !important;color:'+diceColor+';}');
+    addGlobalStyle('#active_skill_dropdown { color: #ccc !important; }');
 
-    if(darkMode) enterDarkMode();
+    if(glassMode) enterGlassMode();
     if(displayChatHeading == false) {
         addGlobalStyle('.main-chat-panel>.panel-heading {display:none}');
         addGlobalStyle('#messages { height:calc(100vh - 191px) !important; overflow-y:default !important; }');
@@ -126,7 +138,7 @@ function addGlobalStyle(css) {
     style.innerHTML = css;
     head.appendChild(style);
 }
-function enterDarkMode(){
+function enterGlassMode(){
     addGlobalStyle('.navbar-default { background-color:#333; color:#ccc !important; }');
     addGlobalStyle('.navbar-default .navbar-nav>li>a { color:#999 !important }');
     addGlobalStyle('.navbar-default .navbar-nav>li>a:hover { color:#ccc !important }');
@@ -135,16 +147,19 @@ function enterDarkMode(){
     addGlobalStyle('.percentage-circle-contents { color:#ccc !important }');
     addGlobalStyle('.percentage-circle-contents>img { filter: invert(100%); }');
     addGlobalStyle('.percentage-circle-fg {fill: black;}');
-    addGlobalStyle('.panel, .breadcrumb { background-color: rgba(0,0,0,0.5) !important; }');
     addGlobalStyle('a { color:'+highlightColor+' !important; }');
+
+    //panel colors
+    addGlobalStyle('.panel, .breadcrumb { background-color: rgba(0,0,0,0.5) !important; }');
     addGlobalStyle('.main-chat-panel .panel-footer { background-color:rgba(0,0,0,0.5) !important; }');
-    addGlobalStyle('.panel-success>.panel-heading, .alert-success, .panel-default>.panel-heading, .panel-info>.panel-heading, .panel-primary>.panel-heading {color: #ccc; background-color: #333; border-color: #666;}');
+    addGlobalStyle('.panel-heading, .alert-success {color: #ccc !important; background-color: rgba(0,0,0,0.5) !important; border-color: #666 !important;}');
     addGlobalStyle('.panel-success, .panel-default, .panel-info, .panel-primary { border-color: #666;}');
+    addGlobalStyle('.panel-footer {color: #ccc; background-color: rgba(0,0,0,0.5); border-color: #666;}');
+
     addGlobalStyle('.dropdown-menu,.list-group-item,.well { background-color:#333; }');
     addGlobalStyle('.dropdown-menu a:hover { background-color:#111 !important; }');
-    addGlobalStyle('.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover{ background-color:#333 !important; }');
+    addGlobalStyle('.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li>a:hover{ background-color:rgba(0,0,0,0.5) !important; }');
     addGlobalStyle('.table>tbody>tr.success>td, .table>tbody>tr.success>th, .table>tbody>tr>td.success, .table>tbody>tr>th.success, .table>tfoot>tr.success>td, .table>tfoot>tr.success>th, .table>tfoot>tr>td.success, .table>tfoot>tr>th.success, .table>thead>tr.success>td, .table>thead>tr.success>th, .table>thead>tr>td.success, .table>thead>tr>th.success{background-color: rgba(255,255,255,0.25) !important;}');
-    addGlobalStyle('.panel-footer {background-color:rgba(0,0,0,0.2)}');
     addGlobalStyle('select {background-color:#333}');
     addGlobalStyle('.table-striped>tbody>tr:nth-of-type(odd) { background: none !important}');
     addGlobalStyle('.table-hover>tbody>tr:hover { background-color: rgba(0,0,0,0.4) !important}');
@@ -155,8 +170,11 @@ function enterDarkMode(){
     addGlobalStyle('#progressBar {background-color:'+highlightColor+' !important;}');
     addGlobalStyle('#user-stat-actions td.row-1.column-1,#user-stat-actions td.row-1.column-2{ color: black !important; padding-top:2px !important;}');
     addGlobalStyle('.nav>li>a:hover { background-color: #333;');
-    addGlobalStyle('.progress { background-color: #ccc;');
+    addGlobalStyle('.progress,.input-group-addon,.form-control { background-color: #ccc;');
     //modal
     addGlobalStyle('.modal-content{ background-color:#333; }');
     addGlobalStyle('.modal-content input, .modal-content select{ background-color:#ccc !important; color: black }');
+    //skills
+    addGlobalStyle('#skill_details, #skill_details .panel-default { background-color:rgba(0,0,0,.25) !important;}');
+
 }
