@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Talibri Chemo
 // @namespace    http://tampermonkey.net/
-// @version      1.1.2
+// @version      1.1.3
 // @description  Remove some of the Cancer
 // @author       Dan Campbell
 // @match        https://www.talibri.com/*
@@ -64,7 +64,7 @@ var displayChatHeading = false; // true or false
     //set static height
     addGlobalStyle('.navbar-fixed-top { height:50px !important }');
     addGlobalStyle('.navbar-fixed-bottom { height:65px !important }');
-    addGlobalStyle('.panel-footer { height:143px !important; }');
+    addGlobalStyle('.panel-footer { height:143px }');
     addGlobalStyle('.row:first-of-type { margin-left:0 !important; margin-right:0 !important; }');
     addGlobalStyle('body>.container-fluid:first-of-type { margin-top:0 !important; padding-top:50px !important; padding-left:0 !important; padding-bottom:0 !important; background-size:cover; background-position: center center; background-attachment: fixed; }');
 
@@ -104,6 +104,11 @@ var displayChatHeading = false; // true or false
 
     //market styles
     addGlobalStyle('div.col-xs-9.main-page .panel-success {margin-bottom: 75px;}');
+
+    //skillbar styles
+    addGlobalStyle('#skill_details .panel-footer {height: auto !important;}');
+    addGlobalStyle('#skill_details {width: 450px; max-height:none !important; overflow-y:visible !important;}');
+    addGlobalStyle('.dropdown .dropdown-toggle {height:100%;}');
 
     if(darkMode) enterDarkMode();
     if(displayChatHeading == false) {
