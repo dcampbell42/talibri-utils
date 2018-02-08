@@ -89,7 +89,7 @@ var displayChatHeading = false; // true or false
     addGlobalStyle('.main-chat-panel .panel-footer { height:80px !important; }');
     $('#main-chat-text-area').attr('placeholder','Enter text');
     addGlobalStyle('.main-chat-panel .form-group { margin-bottom:0 !important; }');
-    addGlobalStyle('.main-chat-panel .form-control { width:450px; }');
+    addGlobalStyle('.main-chat-panel .form-control { width:98%; }');
 
     //footer styles
     addGlobalStyle('.percentage-circle-fill {fill: '+highlightColor+'}');
