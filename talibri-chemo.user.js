@@ -82,7 +82,7 @@ var displayChatHeading = false; // true or false
     addGlobalStyle('body>.container-fluid:first-of-type>div.row>div.col-xs-3 { padding-left:0 !important; height:calc(100vh - 228px) !important; position: fixed !important; width:20%; }');
     addGlobalStyle('.main-chat-panel.panel-heading { height:37px !important; }');
     addGlobalStyle('#messages { height:calc(100vh - 228px) !important; }');
-    addGlobalStyle('#messages .card-text { color: '+chatColor+';}');
+    addGlobalStyle('#messages .card-text { color: '+chatColor+'; overflow-wrap:break-word;}');
     addGlobalStyle('#messages .admin {background-color: '+highlightColor+'; color: black !important;}');
     addGlobalStyle('.main-page { margin-left:20% !important; width:80% !important; margin-right:0 !important; padding-right:0 !important; }');
     addGlobalStyle('.main-chat-panel .form-group>br,.main-chat-panel .form-group>.text-muted {display:none; }');
